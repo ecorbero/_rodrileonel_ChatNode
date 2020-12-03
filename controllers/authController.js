@@ -25,7 +25,7 @@ const createUser = async (req, res = response) => {
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync( password , salt);
 
-        //genero JWT (jason web token)
+        //genero JWT (json web token)
         const token = await generateToken(user.uid);
         
         await user.save();
@@ -33,7 +33,8 @@ const createUser = async (req, res = response) => {
         res.json({
             ok : true,
             user,
-            token
+            token,
+            msg:'Usuario registrado de forma exitosa'
             //message:req.body
         });
 
@@ -71,7 +72,7 @@ const loginUser = async (req, res = response) => {
             });
         }
 
-        //genero JWT (jason web token)
+        //genero JWT (json web token)
         const token = await generateToken(userDB.id);
 
         res.json({
@@ -97,21 +98,21 @@ const renewToken = async(req,res=response) => {
 
         const uid  = req.uid 
 
-        //genero nuevo JWT (jason web token)
-        const token = await generateToken({uid});
+        //genero nuevo JWT (json web token)
+        const token = await generateToken(uid);
 
         //valido usuario
-        const userDB = await User.findById(req.uid);
-        if(!userDB){
+        const user = await User.findById(uid);
+        if(!user){
             return res.status(404).json({
                 ok:false,
-                msj: 'token invalido'
+                msj: 'no se encontro usuario'
             });
         }
 
         res.json({
             ok : true,
-            userDB,
+            user,
             token
         });
 

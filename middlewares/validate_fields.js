@@ -7,7 +7,8 @@ const validateFields = (req,res,next) => {
     if(!err.isEmpty()){
         return res.status(400).json({
             ok : false,
-            message:err.mapped()
+            message:err.mapped(),
+            msg:'Informacion invalida'
         });
     }
         

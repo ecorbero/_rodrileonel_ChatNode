@@ -12,11 +12,9 @@ const validateJWT = (req,res,next) => {
     }
 
     try {
-
         //verifico si soy capaz de obtener el token, sino se dispara el catch
         const { uid } = jwt.verify(token,process.env.JWTKEY);
         req.uid = uid;
-
 
         next();
 

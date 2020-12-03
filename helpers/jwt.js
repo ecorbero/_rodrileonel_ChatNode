@@ -23,6 +23,17 @@ const generateToken = (uid) => {
     });
 };
 
+const verifyJWT = (token = '') =>{
+    try {
+        //verifico si soy capaz de obtener el token, sino se dispara el catch
+        const { uid } = jwt.verify(token,process.env.JWTKEY);
+        return [true,uid];
+    } catch (error) {
+        return [false,null];
+    }
+};
+
 module.exports = {
-    generateToken
+    generateToken,
+    verifyJWT
 }

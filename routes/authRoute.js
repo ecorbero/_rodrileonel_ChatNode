@@ -11,13 +11,13 @@ const router = Router();
 //router.post('/new',createUser);
 router.post('/new',[
     check('name','El nombre es obligatorio').not().isEmpty(),
-    check('email','El email es obligatorio').not().isEmpty(),
+    check('email','El email es obligatorio').isEmail(),
     check('password','El pw es obligatorio').not().isEmpty(),
     validateFields
 ],createUser);
 
 router.post('/',[
-    check('email','El email es obligatorio').not().isEmpty(),
+    check('email','El email es obligatorio').isEmail(),
     check('password','El pw es obligatorio').not().isEmpty(),
     validateFields
 ],loginUser);

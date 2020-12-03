@@ -23,6 +23,8 @@ app.use(express.static(public));
 
 //Rutas
 app.use('/api/login', require('./routes/authRoute'));
+app.use('/api/users', require('./routes/usersRoute'));
+app.use('/api/messages', require('./routes/messagesRoute'));
 
 //app.listen(process.env.PORT,(err)=>{
 server.listen(process.env.PORT,(err)=>{
