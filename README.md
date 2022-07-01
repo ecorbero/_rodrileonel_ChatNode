@@ -1,4 +1,4 @@
-# Flutter Chat Files
+# Flutter/Node/MongoDB Chat
 
 This folder has the files for the Node Js Server App.
 
