@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
@@ -9,6 +10,7 @@ require('./database/config').dbConnection();
 const app = express();
 
 //Lectura y parseo de body
+app.use(cors());
 app.use(express.json());
 
 //Node server (socket)
