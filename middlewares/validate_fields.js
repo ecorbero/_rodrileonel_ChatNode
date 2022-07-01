@@ -8,7 +8,7 @@ const validateFields = (req,res,next) => {
         return res.status(400).json({
             ok : false,
             message:err.mapped(),
-            msg:'Informacion invalida'
+            msg:'Invalid Info'
         });
     }
         

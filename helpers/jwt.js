@@ -14,7 +14,7 @@ const generateToken = (uid) => {
         }, (error, token) => {
             if(error){
                 //no se pudo crear token
-                reject('no se pudo generar el jwt');
+                reject('Could not connect to jwt');
             }else{
                 //hay token
                 resolve(token);

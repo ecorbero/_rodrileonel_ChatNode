@@ -10,15 +10,15 @@ const router = Router();
 
 //router.post('/new',createUser);
 router.post('/new',[
-    check('name','El nombre es obligatorio').not().isEmpty(),
-    check('email','El email es obligatorio').isEmail(),
-    check('password','El pw es obligatorio').not().isEmpty(),
+    check('name','Name is obligatory').not().isEmpty(),
+    check('email','Email is obligatory').isEmail(),
+    check('password','Password is obligatory').not().isEmpty(),
     validateFields
 ],createUser);
 
 router.post('/',[
-    check('email','El email es obligatorio').isEmail(),
-    check('password','El pw es obligatorio').not().isEmpty(),
+    check('email','Email is obligatory').isEmail(),
+    check('password','Password is obligatory').not().isEmpty(),
     validateFields
 ],loginUser);
 
