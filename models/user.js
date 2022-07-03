@@ -20,7 +20,7 @@ const UserSchema = Schema({
     },
 });
 
-//extraer solo lo que necesito que se muestre en la respuesta de userschema
+// extract only what we need to show
 UserSchema.method('toJSON',function(){
     const { __v,_id, password, ...object} = this.toObject();
     object.uid = _id;

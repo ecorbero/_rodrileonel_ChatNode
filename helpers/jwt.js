@@ -3,20 +3,20 @@ const jwt = require('jsonwebtoken');
 const generateToken = (uid) => {
 
     return new Promise((resolve,reject)=>{
-        //el jwt tiene tres partes
-        //1 un header
-        //2 un payload
+        //jwt has three parts
+        //1.- header
+        //2.- payload
         const payload = { uid };
 
-        //3 y un secret
+        //3.- a secret
         jwt.sign(payload, process.env.JWTKEY,{
             expiresIn:'12h',
         }, (error, token) => {
             if(error){
-                //no se pudo crear token
+                //Could Not Create Token
                 reject('Could not connect to jwt');
             }else{
-                //hay token
+                // Token Sucsefully created!!
                 resolve(token);
             }
         })
@@ -25,7 +25,7 @@ const generateToken = (uid) => {
 
 const verifyJWT = (token = '') =>{
     try {
-        //verifico si soy capaz de obtener el token, sino se dispara el catch
+        // Try to verify the Token, if not go to Catch
         const { uid } = jwt.verify(token,process.env.JWTKEY);
         return [true,uid];
     } catch (error) {

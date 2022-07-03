@@ -19,7 +19,7 @@ const MessageSchema = Schema({
     timestamps:true
 });
 
-//extraer solo lo que necesito que se muestre en la respuesta de mesaggeschema
+// extract what we need to show
 MessageSchema.method('toJSON',function(){
     const { __v,_id, ...object} = this.toObject();
     return object;
