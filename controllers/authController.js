@@ -12,20 +12,20 @@ const createUser = async (req, res = response) => {
 
         const user = new User(req.body);
 
-        //validar si ya existe el correo
+        //validate if email already exists
         const emailExist = await User.findOne({email:email});
         if(emailExist){
             return res.status(400).json({
                 ok: false,
-                msg: 'El correo ya existe'
+                msg: 'Email already exists'
             });
         }
 
-        //ecriptar contraseña
+        //ecript password
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync( password , salt);
 
-        //genero JWT (json web token)
+        // generate JWT (json web token)
         const token = await generateToken(user.id);
         
         await user.save();
@@ -34,7 +34,7 @@ const createUser = async (req, res = response) => {
             ok : true,
             user,
             token,
-            msg:'Usuario registrado de forma exitosa'
+            msg:'User Sucsefully created'
             //message:req.body
         });
 
@@ -42,7 +42,7 @@ const createUser = async (req, res = response) => {
         console.log(error);
         res.status(500).json({
             ok:false,
-            msg:'Ocurrio un error desconocido, hable con el administrador'
+            msg:'Unknown Error, Contact Admin'
         });
     }
 
@@ -54,25 +54,25 @@ const loginUser = async (req, res = response) => {
     //const email = req.body.email // es lo mismo
 
     try{
-        //valido usuario
+        //valid user
         const userDB = await User.findOne({email});
         if(!userDB){
             return res.status(404).json({
                 ok:false,
-                msj: 'usuario no encontrado'
+                msj: 'user NOT found'
             });
         }
 
-        //valido password
+        //valid password
         const validPw = bcrypt.compareSync(password,userDB.password);
         if(!validPw){
             return res.status(400).json({
                 ok:false,
-                msj: 'contraseña invalida'
+                msj: 'Invalid password'
             });
         }
 
-        //genero JWT (json web token)
+        // generate JWT (json web token)
         const token = await generateToken(userDB.id);
 
         res.json({
@@ -98,15 +98,15 @@ const renewToken = async(req,res=response) => {
 
         const uid  = req.uid 
 
-        //genero nuevo JWT (json web token)
+        //create new JWT (json web token)
         const token = await generateToken(uid);
 
-        //valido usuario
+        //valid user
         const user = await User.findById(uid);
         if(!user){
             return res.status(404).json({
                 ok:false,
-                msj: 'no se encontro usuario'
+                msj: 'User NOT found'
             });
         }
 
@@ -120,7 +120,7 @@ const renewToken = async(req,res=response) => {
         console.log(error);
         res.status(500).json({
             ok:false,
-            msg:'Ocurrio un error desconocido, hable con el administrador'
+            msg:'Unknown error, contact admin'
         });
     }
 }

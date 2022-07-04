@@ -18,12 +18,17 @@ const UserSchema = Schema({
         type: Boolean,
         default: false,
     },
+    time: {
+        type: String,
+        default: new Date(),
+    },
 });
 
 // extract only what we need to show
 UserSchema.method('toJSON',function(){
     const { __v,_id, password, ...object} = this.toObject();
     object.uid = _id;
+    //console.log(object)
     return object;
 });
 
