@@ -27,8 +27,10 @@ const verifyJWT = (token = '') =>{
     try {
         // Try to verify the Token, if not go to Catch
         const { uid } = jwt.verify(token,process.env.JWTKEY);
+        //console.log("token = " + token + " this");
         return [true,uid];
     } catch (error) {
+        //console.log("token = " + token + " this");
         return [false,null];
     }
 };

@@ -4,12 +4,16 @@ const{io} = require('../index');
 
 //Mensajes de sockets
 io.on('connection', client => {
-    console.log('Cliente conectado');
+    console.log('Client connected');
+    console.log(client.handshake.headers['x-token']);
 
     const [ok, uid] = verifyJWT(client.handshake.headers['x-token']);
 
     //verificar auth
-    if(!ok) return client.disconnect();
+    if(!ok) {
+        console.log("Wrong Token, disconnecting");
+        return client.disconnect();
+    } 
 
     //actualizar campo online de usuario en la base de datos
     userConnected(uid);
