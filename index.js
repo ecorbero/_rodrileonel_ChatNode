@@ -27,6 +27,7 @@ app.use(express.static(public));
 app.use('/api/login', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/messages', require('./routes/messagesRoute'));
+app.use('/api/groups', require('./routes/groupRoute'));
 
 //app.listen(process.env.PORT,(err)=>{
 server.listen(process.env.PORT,(err)=>{

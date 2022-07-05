@@ -21,13 +21,14 @@ const saveMessage = async(payload) =>{
     /*payload {from:'',to:'',message:''} */
 
     try {
-        const message = Message(payload);
-        await message.save();
+        const groupchat = Groupchat(payload);
+        await groupchat.save();
         return true; //tambien se podria retornar el mensaje
     } catch (error) {
         return false;
     }
 }
+
 
 module.exports = {
     userConnected,
