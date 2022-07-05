@@ -15,6 +15,10 @@ const MessageSchema = Schema({
         type: String,
         required: true,
     },
+    groupChat: {
+        type: Boolean,
+        required: false,
+    },
 },{
     timestamps:true
 });
