@@ -39,21 +39,26 @@ const createGroup = async (req, res = response) => {
 
 };
 
-const getGroup= async (req,res) => {
+const getGroups= async (req,res) => {
 
-    const groupname = req.params.groupname;
+console.log("requested groups")
 
-    const groupChats = await Groupchat.find({groupname:groupname});
+    const page = Number(req.query.page) || 0;
+
+    const rooms = await Groupchat
+        .find({}) // find all
+        .skip(page)
+        .limit(20);
 
     res.json({
-        ok:true,
-        msj:groupChats,
-    })
+        ok : true,
+        rooms
+    });
 
 }
 
 
 module.exports = {
-    getGroup,
+    getGroups,
     createGroup
 };

@@ -26,7 +26,11 @@ io.on('connection', client => {
 
     //escuchar el mensaje
     client.on('message',async payload =>{
+        
+        console.log("sddfw333");
         console.log(payload);
+        console.log(uid);
+
         await saveMessage(payload); 
         io.to(payload.to).emit('message',payload);
     })

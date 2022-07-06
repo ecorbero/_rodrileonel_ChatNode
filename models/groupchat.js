@@ -5,18 +5,7 @@ const GroupchatSchema = Schema({
     groupname: {
         type: String,
         required: true,
-    },
-    members: [{
-        userid: {
-            type: Schema.Types.ObjectId,
-            ref:'User',
-            required: false
-        },
-        name: {
-            type: String,
-            required: false,
-        },
-    }],
+    }
 },{
     timestamps:true
 });
@@ -24,6 +13,7 @@ const GroupchatSchema = Schema({
 // extract what we need to show
 GroupchatSchema.method('toJSON',function(){
     const { __v,_id, ...object} = this.toObject();
+    object.uid = _id;
     return object;
 });
 

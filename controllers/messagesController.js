@@ -6,16 +6,32 @@ const getChat = async (req,res) => {
     const uid = req.uid;
     const mFrom = req.params.from;
 
-    const last30 = await Message.find({
-        $or: [{from:uid,to:mFrom},{from:mFrom,to:uid}]
-    })
-    .sort({createdAt:'desc'})
-    .limit(30);
+    var last30;
 
-    res.json({
-        ok:true,
-        msj:last30,
-    })
+    // If a group message the mFrom variable with have "AAA"
+    if ( mFrom.substring(0, 3) == "AAA") {
+        console.log(mFrom.slice(3))
+        
+        last30 = await Message.find({to:mFrom.slice(3)})
+        .sort({createdAt:'desc'})
+        .limit(30);
+
+        res.json({
+            ok:true,
+            msj:last30,
+        })
+    } else { // Not a group message (No "AAA")
+        last30 = await Message.find({
+            $or: [{from:uid,to:mFrom},{from:mFrom,to:uid}]
+        })
+        .sort({createdAt:'desc'})
+        .limit(30);
+
+        res.json({
+            ok:true,
+            msj:last30,
+        })
+    }
 
 }
 

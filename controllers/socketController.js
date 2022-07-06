@@ -21,8 +21,8 @@ const saveMessage = async(payload) =>{
     /*payload {from:'',to:'',message:''} */
 
     try {
-        const groupchat = Groupchat(payload);
-        await groupchat.save();
+        const message = Message(payload);
+        await message.save();
         return true; //tambien se podria retornar el mensaje
     } catch (error) {
         return false;
