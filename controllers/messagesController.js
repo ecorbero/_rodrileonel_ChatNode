@@ -10,7 +10,7 @@ const getChat = async (req,res) => {
 
     // If a group message the mFrom variable with have "AAA"
     if ( mFrom.substring(0, 3) == "AAA") {
-        console.log(mFrom.slice(3))
+        //console.log(mFrom.slice(3))
         
         last30 = await Message.find({to:mFrom.slice(3)})
         .sort({createdAt:'desc'})

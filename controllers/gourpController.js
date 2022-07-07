@@ -41,7 +41,7 @@ const createGroup = async (req, res = response) => {
 
 const getGroups= async (req,res) => {
 
-console.log("requested groups")
+//console.log("requested groups")
 
     const page = Number(req.query.page) || 0;
 
