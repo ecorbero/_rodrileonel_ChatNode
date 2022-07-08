@@ -14,7 +14,7 @@ To start this project:
 
 0. Clone this Project 
 1. Execute "npm install" in your console, in this directory.
-2. rename file "example.dev" to ".dev"
+2. rename file "example.dev" to ".env"
 3. Execute in your local computer "Mongo Compass"
 4. Execute "npm run dev" in your console, in this directory.
 
