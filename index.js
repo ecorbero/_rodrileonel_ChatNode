@@ -29,7 +29,7 @@ app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/messages', require('./routes/messagesRoute'));
 app.use('/api/groups', require('./routes/groupRoute'));
 
-// For testing with heroku
+// For testing with heroku server
 app.route("/check").get((req,res) =>{
  return res.json("Your App is Working");
 })
