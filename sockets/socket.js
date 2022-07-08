@@ -2,9 +2,6 @@ const { userConnected, userDisconnected, saveMessage } = require('../controllers
 const { verifyJWT } = require('../helpers/jwt');
 const{io} = require('../index');
 
-// room to leave id
-var lastRoom;
-
 //Mensajes de sockets
 io.on('connection', client => {
     console.log(`Client connected!`);
@@ -39,17 +36,13 @@ io.on('connection', client => {
     client.on('message',async payload =>{
         
         if (payload.changeroom){ // Mesage Change Room
-            console.log(payload);
-            //console.log(lastRoom);
-            if (payload.leaveRoom == "na" && lastRoom != null) {
-                // Disconnect from the previous Joined Room, if this is NOT a Group Chat
-                client.leave(lastRoom);
-            } else {
-                client.leave(payload.leaveRoom);
-            }
             
-            lastRoom = payload.joinRoom;
-            client.join(lastRoom);
+            // Leave Room
+            console.log(`Client Left room = ${payload.leaveRoom}`);
+            client.leave(payload.leaveRoom);
+            // Join Room
+            console.log(`Client entered room = ${payload.joinRoom}`);
+            client.join(payload.joinRoom);
         } else {        // Chat Message
             //console.log("sddfw333");
             console.log(payload);
