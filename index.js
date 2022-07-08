@@ -29,6 +29,11 @@ app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/messages', require('./routes/messagesRoute'));
 app.use('/api/groups', require('./routes/groupRoute'));
 
+// For testing with heroku
+app.route("/check").get((req,res) =>{
+ return res.json("Your App is Working");
+})
+
 //app.listen(process.env.PORT,(err)=>{
 server.listen(process.env.PORT,(err)=>{
     if(err) throw new Error(err);
