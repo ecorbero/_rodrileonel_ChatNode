@@ -6,13 +6,13 @@ const { generateToken } = require("../helpers/jwt");
 const createUser = async (req, res = response) => {
 
     const{ email,password } = req.body 
-    //const email = req.body.email // es lo mismo
+    // const email = req.body.email // is same
 
     try{
 
         const user = new User(req.body);
 
-        //validate if email already exists
+        // validate if email already exists
         const emailExist = await User.findOne({email:email});
         if(emailExist){
             return res.status(400).json({
@@ -21,7 +21,7 @@ const createUser = async (req, res = response) => {
             });
         }
 
-        //ecript password
+        // encrypt password
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync( password , salt);
 
@@ -51,7 +51,7 @@ const createUser = async (req, res = response) => {
 const loginUser = async (req, res = response) => {
 
     const{ email,password } = req.body 
-    //const email = req.body.email // es lo mismo
+    //const email = req.body.email // is same
 
     try{
         //valid user

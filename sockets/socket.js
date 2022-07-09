@@ -2,9 +2,7 @@ const { userConnected, userDisconnected, saveMessage } = require('../controllers
 const { verifyJWT } = require('../helpers/jwt');
 const{io} = require('../index');
 
-console.log("dddww")
-
-//Mensajes de sockets
+// sockets messages
 io.on('connection', client => {
     console.log(`Client connected!`);
 
@@ -14,7 +12,7 @@ io.on('connection', client => {
     console.log(`Room Name = ${roomName}`);
     console.log(`uid = ${uid}`);
 
-    //verificar auth
+    //verify auth
     if(!ok) {
         console.log((`Wrong token(${client.handshake.headers['x-token']}) => disconnecting `));
         return client.disconnect();
@@ -46,9 +44,7 @@ io.on('connection', client => {
             console.log(`Client entered room = ${payload.joinRoom}`);
             client.join(payload.joinRoom);
         } else {        // Chat Message
-            //console.log("sddfw333");
             console.log(payload);
-            //console.log(uid);
 
             await saveMessage(payload); 
             io.to(payload.to).emit('message',payload);
@@ -61,13 +57,4 @@ io.on('connection', client => {
             userDisconnected(uid);
         }
     });
-
-
-
-    // client.on('message', (payload) => { 
-    //     console.log('Mensaje recibido',payload);
-    //     //ahora voy a emitir una respuesta
-    //     io.emit('supermessage',{admin:payload['name']});
-    // });
-
 });

@@ -23,7 +23,7 @@ const saveMessage = async(payload) =>{
     try {
         const message = Message(payload);
         await message.save();
-        return true; //tambien se podria retornar el mensaje
+        return true;
     } catch (error) {
         return false;
     }

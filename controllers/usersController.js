@@ -8,8 +8,8 @@ const getUsers = async (req,res=response) =>{
     const page = Number(req.query.page) || 0;
 
     const users = await User
-        .find({_id:{ $ne: req.uid}}) //busco todos los usuarios cuyo id no sea el mio ne=notexist
-        .sort('-online')// el '-' es para ordenarlos descendentemente
+        .find({_id:{ $ne: req.uid}}) //find all useres except mine, ne=notexist
+        .sort('-online')// '-' show first online users
         .skip(page)
         .limit(20);
 

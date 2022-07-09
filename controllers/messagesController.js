@@ -8,7 +8,7 @@ const getChat = async (req,res) => {
 
     var last30;
 
-    // If a group message the mFrom variable with have "AAA"
+    // If mFrom starts with "AAA" => it IS a group message
     if ( mFrom.substring(0, 3) == "AAA") {
         //console.log(mFrom.slice(3))
         
