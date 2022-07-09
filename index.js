@@ -13,12 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Node server (socket)
-const server = require('http').createServer(app);
-//const io = require('socket.io')(server);
-module.exports.io = require('socket.io')(server);
-require('./sockets/socket');
-
 //path publico
 const public = path.resolve(__dirname,'public');
 app.use(express.static(public));
@@ -34,8 +28,24 @@ app.route("/check").get((req,res) =>{
  return res.json("Your App is Working");
 })
 
+//Node server (socket)
+const server = require('http').createServer(app);
+
 //app.listen(process.env.PORT,(err)=>{
 server.listen(process.env.PORT,(err)=>{
     if(err) throw new Error(err);
     console.log('Server running on Port: ',process.env.PORT);
 });
+
+//const io = require('socket.io')(server);
+module.exports.io = require('socket.io')(server, {
+    cors: {
+      origin: '*',
+      //methods: ["GET", "POST"],
+      //allowedHeaders: ["x-token","room"],
+      //credentials: true
+    }
+  }
+);
+
+require('./sockets/socket');
