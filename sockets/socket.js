@@ -2,6 +2,8 @@ const { userConnected, userDisconnected, saveMessage } = require('../controllers
 const { verifyJWT } = require('../helpers/jwt');
 const{io} = require('../index');
 
+console.log("dddww")
+
 //Mensajes de sockets
 io.on('connection', client => {
     console.log(`Client connected!`);
